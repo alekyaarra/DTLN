@@ -125,6 +125,10 @@ def run_model(model, in_path):
     #                     help='weights of the enhancement model in .h5 format')
     # args = parser.parse_args()
     # # determine type of model
+    file  = in_path.split('/')[-1]
+    file = in_path.split('.')[0]
+    out_path = in_path.replace(file, file + '_processed')
+
     if model.find('_norm_') != -1:
         norm_stft = True
     else:
@@ -137,6 +141,8 @@ def run_model(model, in_path):
     modelClass.model.load_weights(model)
     # process the folder
     process_folder(modelClass.model, in_path)
+
+    return out_path
 
 
 
